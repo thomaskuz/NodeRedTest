@@ -1,0 +1,23 @@
+docker run --name hivemq-ce -d -p 1883:1883 hivemq/hivemq-ce
+
+start the publisher:
+python mqtt_publisher.py --topic demo/test --count 5 --message "Hello #{n}"
+
+Start the listener: 
+python mqtt_subscriber.py --topic demo/test
+
+Publisher options (`python mqtt_publisher.py ...`):
+- --host HOST (default localhost)
+- --port PORT (default 1883)
+- --topic TOPIC (default demo/test)
+- --message TEXT (default "Hello from Codex!", `{n}` expands to message number)
+- --count N (default 1, use 0 to loop indefinitely)
+- --delay SECONDS (default 1.0 between messages)
+- --client-id ID (optional, auto-generated if omitted)
+
+Subscriber options (`python mqtt_subscriber.py ...`):
+- --host HOST (default localhost)
+- --port PORT (default 1883)
+- --topic TOPIC_FILTER (default demo/test)
+- --client-id ID (optional, auto-generated if omitted)
+- --max-messages N (default 0 to keep listening forever)
