@@ -1,10 +1,15 @@
+HiveMQ (MQTT):
 docker run --name hivemq-ce -d -p 1883:1883 hivemq/hivemq-ce
+Artemis (AMQP):
+docker run -d --name artemis -p 8161:8161 -p 5672:5672 apache/activemq-artemis:latest-alpine
+Node-RED:
+docker run -it -p 1880:1880 -v node_red_data:/data --name mynodered nodered/node-red
 
 start the publisher:
-python mqtt_publisher.py --topic demo/test --count 5 --message "Hello #{n}"
+python MQTT/mqtt_publisher.py --topic demo/test --count 5 --message "Hello #{n}"
 
 Start the listener: 
-python mqtt_subscriber.py --topic demo/test
+python MQTT/mqtt_subscriber.py --topic demo/test
 
 Publisher options (`python mqtt_publisher.py ...`):
 - --host HOST (default localhost)
@@ -21,3 +26,5 @@ Subscriber options (`python mqtt_subscriber.py ...`):
 - --topic TOPIC_FILTER (default demo/test)
 - --client-id ID (optional, auto-generated if omitted)
 - --max-messages N (default 0 to keep listening forever)
+
+`
