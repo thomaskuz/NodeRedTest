@@ -1,0 +1,236 @@
+[
+    {
+        "id": "e7ae23176ecad18a",
+        "type": "tab",
+        "label": "JSON IN",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7f530d690bdf901e",
+        "type": "tab",
+        "label": "XML in",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d29d2ec8fb29163f",
+        "type": "tab",
+        "label": "Receiving messages",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c921a591da5dbfd1",
+        "type": "amqp-endpoint",
+        "host": "artemis",
+        "port": "5672",
+        "username": "artemis",
+        "password": "artemis",
+        "name": "name"
+    },
+    {
+        "id": "bebcfb7120d972ee",
+        "type": "inject",
+        "z": "e7ae23176ecad18a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hello from nodered",
+        "payloadType": "str",
+        "x": 350,
+        "y": 580,
+        "wires": [
+            [
+                "57300424789a685d",
+                "a773dd88d99793df"
+            ]
+        ]
+    },
+    {
+        "id": "57300424789a685d",
+        "type": "debug",
+        "z": "e7ae23176ecad18a",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "35b413336c7cbbf5",
+        "type": "amqp-sender",
+        "z": "e7ae23176ecad18a",
+        "endpoint": "c921a591da5dbfd1",
+        "address": "demo.topic",
+        "autosettle": true,
+        "dynamic": false,
+        "sndsettlemode": 2,
+        "rcvsettlemode": 0,
+        "durable": 0,
+        "expirypolicy": "session-end",
+        "name": "",
+        "x": 640,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a773dd88d99793df",
+        "type": "function",
+        "z": "e7ae23176ecad18a",
+        "name": "function 1",
+        "func": "msg.payload = {\n    body: String(msg.payload),\n    properties: {\n        content_type: \"text/plain; charset=utf-8\"\n    }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 640,
+        "wires": [
+            [
+                "35b413336c7cbbf5"
+            ]
+        ]
+    },
+    {
+        "id": "0350d22a3d17cc56",
+        "type": "inject",
+        "z": "7f530d690bdf901e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "XML test op nodered",
+        "payloadType": "str",
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "8bb1290a7c671e74"
+            ]
+        ]
+    },
+    {
+        "id": "8bb1290a7c671e74",
+        "type": "function",
+        "z": "7f530d690bdf901e",
+        "name": "function 2",
+        "func": "const injected = String(msg.payload ?? \"\");\n\nconst xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event>\n  <source>nodered</source>\n  <messageId>${injected}</messageId>\n</event>`;\n\nmsg.payload = {\n  body: xml,\n  properties: {\n    content_type: \"application/xml; charset=utf-8\"\n  }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "a489f2fd3727976d",
+                "9a034a1befc3850e"
+            ]
+        ]
+    },
+    {
+        "id": "a489f2fd3727976d",
+        "type": "debug",
+        "z": "7f530d690bdf901e",
+        "name": "debug XML in",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9a034a1befc3850e",
+        "type": "amqp-sender",
+        "z": "7f530d690bdf901e",
+        "endpoint": "c921a591da5dbfd1",
+        "address": "demo.topic",
+        "autosettle": true,
+        "dynamic": false,
+        "sndsettlemode": 2,
+        "rcvsettlemode": 0,
+        "durable": 0,
+        "expirypolicy": "session-end",
+        "name": "",
+        "x": 600,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ef4c04d203f4b759",
+        "type": "amqp-receiver",
+        "z": "d29d2ec8fb29163f",
+        "endpoint": "c921a591da5dbfd1",
+        "address": "demo.topic::demo.sub.q1",
+        "autoaccept": true,
+        "creditwindow": 100,
+        "dynamic": false,
+        "sndsettlemode": 2,
+        "rcvsettlemode": 0,
+        "durable": "1",
+        "expirypolicy": "session-end",
+        "name": "NR",
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "c0159197d05c41da"
+            ]
+        ]
+    },
+    {
+        "id": "c0159197d05c41da",
+        "type": "debug",
+        "z": "d29d2ec8fb29163f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    }
+]
