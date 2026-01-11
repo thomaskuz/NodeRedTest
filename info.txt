@@ -3,7 +3,13 @@ docker run --name hivemq-ce -d -p 1883:1883 hivemq/hivemq-ce
 Artemis (AMQP):
 docker run -d --name artemis -p 8161:8161 -p 5672:5672 apache/activemq-artemis:latest-alpine
 Node-RED:
-docker run -it -p 1880:1880 -v node_red_data:/data --name mynodered nodered/node-red
+(run it) docker start mynodered
+(setup) docker run -d -p 1880:1880 -v "$PWD/NodeRedData:/data" --name mynodered nodered/node-red
+
+(setup)
+docker network create iotnet
+docker network connect iotnet artemis
+docker network connect iotnet mynodered
 
 start the publisher:
 python MQTT/mqtt_publisher.py --topic demo/test --count 5 --message "Hello #{n}"
