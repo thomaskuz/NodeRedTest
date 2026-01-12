@@ -1,0 +1,1 @@
+https://github.com/amqp/node-red-contrib-rhea/blob/master/doc/AMQP-Sender.md

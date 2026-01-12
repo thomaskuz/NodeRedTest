@@ -4,3 +4,13 @@ Project summary (high level)
 - `info.txt`: quick commands for running the local HiveMQ broker container and invoking the sample scripts. Includes flag documentation for both publisher and subscriber tools.
 - `mqtt_publisher.py`: CLI tool using Paho MQTT to publish messages to a configurable topic on `localhost:1883` (or any broker). Supports templated payloads, adjustable delays, finite or infinite counts, and optional client IDs.
 - `mqtt_subscriber.py`: Companion CLI tool that subscribes to a topic filter and prints all incoming messages, optionally stopping after a specified number. Auto-subscribes on connect and handles clean shutdown.
+
+
+next steps for OT/events side: 
+1) trigger simulated events
+    a) within Artemis
+    b) within SAM interface
+    c) within NodeRed
+2) Read events with NodeRed
+3) Connect NodeRed with ITOT broker software
+4) Configure Confluent Kafka
