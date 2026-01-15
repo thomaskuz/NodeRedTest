@@ -3,7 +3,7 @@
         "id": "e7ae23176ecad18a",
         "type": "tab",
         "label": "JSON IN",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -19,7 +19,7 @@
         "id": "d29d2ec8fb29163f",
         "type": "tab",
         "label": "Receiving messages",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -128,9 +128,9 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "XML test op nodered",
+        "payload": "Thomas test #1",
         "payloadType": "str",
-        "x": 160,
+        "x": 140,
         "y": 240,
         "wires": [
             [

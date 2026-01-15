@@ -3,7 +3,7 @@
         "id": "e7ae23176ecad18a",
         "type": "tab",
         "label": "JSON IN",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -128,9 +128,9 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "XML test op nodered",
+        "payload": "Thomas test #1",
         "payloadType": "str",
-        "x": 160,
+        "x": 140,
         "y": 240,
         "wires": [
             [
@@ -143,7 +143,7 @@
         "type": "function",
         "z": "7f530d690bdf901e",
         "name": "function 2",
-        "func": "const xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event>\n  <source>nodered</source>\n  <messageId>nr-001</messageId>\n</event>`;\n\nmsg.payload = {\n    body: xml,\n    properties: {\n        content_type: \"application/xml; charset=utf-8\"\n    }\n};\n\nreturn msg;",
+        "func": "const injected = String(msg.payload ?? \"\");\n\nconst xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<event>\n  <source>nodered</source>\n  <messageId>${injected}</messageId>\n</event>`;\n\nmsg.payload = {\n  body: xml,\n  properties: {\n    content_type: \"application/xml; charset=utf-8\"\n  }\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -189,7 +189,7 @@
         "durable": 0,
         "expirypolicy": "session-end",
         "name": "",
-        "x": 580,
+        "x": 600,
         "y": 360,
         "wires": [
             []
