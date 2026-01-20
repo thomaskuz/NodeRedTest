@@ -1,41 +1,44 @@
 <mxfile host="65bd71144e">
     <diagram id="gy1sp0HpTuKFdyZ2isoq" name="Page-1">
-        <mxGraphModel dx="641" dy="745" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="781" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="5" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="3">
+                <mxCell id="11" value="&lt;p&gt;ITOT temp server with Ubuntu on WSL&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="130" y="10" width="260" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="" style="edgeStyle=none;html=1;" parent="1" source="2" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="VS_publisher" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="60" y="270" width="120" height="60" as="geometry"/>
+                <mxCell id="2" value="VS_publisher" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry y="270" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="Broker" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="3" value="Artemis" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="260" y="270" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="NR_client (sub &amp;amp; pub)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="260" y="160" width="120" height="60" as="geometry"/>
+                <mxCell id="4" value="NR_client (sub &amp;amp; pub)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="100" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                <mxCell id="6" value="" style="endArrow=classic;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" edge="1" target="4">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="290" y="270" as="sourcePoint"/>
                         <mxPoint x="290" y="220" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="7" value="" style="endArrow=classic;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="3">
+                <mxCell id="7" value="" style="endArrow=classic;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" target="3" edge="1" source="4">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="350" y="220" as="sourcePoint"/>
                         <mxPoint x="350" y="260" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="8" value="VS_publisher" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="450" y="270" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="9" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="8">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="380" y="299.5" as="sourcePoint"/>
-                        <mxPoint x="460" y="299.5" as="targetPoint"/>
+                <mxCell id="12" value="" style="endArrow=classic;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="129.38" as="sourcePoint"/>
+                        <mxPoint x="570" y="129.38" as="targetPoint"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="FAB mqtt broker" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="100" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

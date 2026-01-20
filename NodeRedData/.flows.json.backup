@@ -11,7 +11,7 @@
         "id": "7f530d690bdf901e",
         "type": "tab",
         "label": "XML in",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -19,6 +19,30 @@
         "id": "d29d2ec8fb29163f",
         "type": "tab",
         "label": "Receiving messages",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7ac75280bf05c3fe",
+        "type": "tab",
+        "label": "AC test",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c3df28c7bd861122",
+        "type": "tab",
+        "label": "MQTT test push",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ed73df9ca2c23910",
+        "type": "tab",
+        "label": "MQTT read",
         "disabled": false,
         "info": "",
         "env": []
@@ -31,6 +55,65 @@
         "username": "artemis",
         "password": "artemis",
         "name": "name"
+    },
+    {
+        "id": "bb335da5cbd0edbb",
+        "type": "mqtt-broker",
+        "name": "hivemq-ce",
+        "broker": "hivemq-ce",
+        "port": 1883,
+        "clientid": "NodeRed-publisher",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a5c5f2b0d1c2e3f4",
+        "type": "mqtt-broker",
+        "name": "HiveMQ-1883",
+        "broker": "hivemq-ce",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
         "id": "bebcfb7120d972ee",
@@ -231,6 +314,102 @@
         "statusType": "auto",
         "x": 700,
         "y": 400,
+        "wires": []
+    },
+    {
+        "id": "12e3721ef7d8dc08",
+        "type": "function",
+        "z": "7ac75280bf05c3fe",
+        "name": "function 3",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b7c2d6b0d7f5f1a1",
+        "type": "inject",
+        "z": "c3df28c7bd861122",
+        "name": "Send JSON",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 480,
+        "wires": [
+            [
+                "8d4f0f7f3f2d9a22"
+            ]
+        ]
+    },
+    {
+        "id": "8d4f0f7f3f2d9a22",
+        "type": "function",
+        "z": "c3df28c7bd861122",
+        "name": "Build JSON payload",
+        "func": "// Build a JSON object as msg.payload\nmsg.topic = \"test/nodered/json\"; // optional if set on MQTT node\n\nmsg.payload = {\n  deviceId: \"pump-01\",\n  ts: new Date().toISOString(),\n  body: {\n    setpoint: 42,\n    mode: \"auto\",\n    comment: \"Hello from Node-RED\"\n  }\n};\n\n// Make sure payload is JSON (object). MQTT out will stringify if 'Output' is set to auto/string.\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "d1d6c2d4d6d2d3a3",
+                "7f7b6b7b8b7b9b0c"
+            ]
+        ]
+    },
+    {
+        "id": "d1d6c2d4d6d2d3a3",
+        "type": "mqtt out",
+        "z": "c3df28c7bd861122",
+        "name": "Publish to HiveMQ",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a5c5f2b0d1c2e3f4",
+        "x": 650,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "7f7b6b7b8b7b9b0c",
+        "type": "debug",
+        "z": "c3df28c7bd861122",
+        "name": "Debug payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 650,
+        "y": 540,
         "wires": []
     }
 ]

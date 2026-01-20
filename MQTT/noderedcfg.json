@@ -1,0 +1,108 @@
+[
+  {
+    "id": "b7c2d6b0d7f5f1a1",
+    "type": "inject",
+    "z": "flow1",
+    "name": "Send JSON",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 160,
+    "y": 120,
+    "wires": [
+      [
+        "8d4f0f7f3f2d9a22"
+      ]
+    ]
+  },
+  {
+    "id": "8d4f0f7f3f2d9a22",
+    "type": "function",
+    "z": "flow1",
+    "name": "Build JSON payload",
+    "func": "// Build a JSON object as msg.payload\nmsg.topic = \"test/nodered/json\"; // optional if set on MQTT node\n\nmsg.payload = {\n  deviceId: \"pump-01\",\n  ts: new Date().toISOString(),\n  body: {\n    setpoint: 42,\n    mode: \"auto\",\n    comment: \"Hello from Node-RED\"\n  }\n};\n\n// Make sure payload is JSON (object). MQTT out will stringify if 'Output' is set to auto/string.\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 380,
+    "y": 120,
+    "wires": [
+      [
+        "d1d6c2d4d6d2d3a3",
+        "7f7b6b7b8b7b9b0c"
+      ]
+    ]
+  },
+  {
+    "id": "d1d6c2d4d6d2d3a3",
+    "type": "mqtt out",
+    "z": "flow1",
+    "name": "Publish to HiveMQ",
+    "topic": "",
+    "qos": "0",
+    "retain": "",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "a5c5f2b0d1c2e3f4",
+    "x": 620,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "7f7b6b7b8b7b9b0c",
+    "type": "debug",
+    "z": "flow1",
+    "name": "Debug payload",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 620,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "a5c5f2b0d1c2e3f4",
+    "type": "mqtt-broker",
+    "name": "HiveMQ-1883",
+    "broker": "YOUR_HIVEMQ_HOST",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  }
+]
